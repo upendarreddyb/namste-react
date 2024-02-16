@@ -1,0 +1,23 @@
+{
+  "name": "react-sample",
+  "version": "1.0.0",
+  "description": "this is namste react by upendar",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/upendarreddyb/namste-react.git"
+  },
+  "keywords": [],
+  "author": "upendar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/upendarreddyb/namste-react/issues"
+  },
+  "homepage": "https://github.com/upendarreddyb/namste-react#readme",
+  "devDependencies": {
+    "parcel": "^2.11.0"
+  }
+}
