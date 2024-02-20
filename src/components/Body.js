@@ -1,13 +1,14 @@
-import { resapi } from "../utils/resList";
 import Rescard from "./Rescard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+
 const Body = () => {
 
     const [Listofrestarunts, setfilterRestro] = useState([]);
     const [searchText, setSearchTeaxt] = useState("");
-    const[filterddata,setfilterData] = useState([]);
+    const [filterddata, setfilterData] = useState([]);
 
     useEffect(() => {
         fetchswiggi()
@@ -17,8 +18,8 @@ const Body = () => {
         const response = await axios.get(
             "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING", {
         })
-        await setfilterRestro(response.data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
-        await setfilterData(response.data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
+        setfilterRestro(response.data?.data?.cards[4]?.card.card.gridElements?.infoWithStyle?.restaurants);
+        setfilterData(response.data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         console.log("updated data", response.data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
     }
 
@@ -40,7 +41,7 @@ const Body = () => {
                     <button onClick={() => {
                         console.log("searchText", searchText);
                         const filterdrestro = Listofrestarunts.filter(
-                            (response) =>  response.info.name.includes(searchText)
+                            (response) => response.info.name.includes(searchText)
                         )
                         console.log("filterdrestro", filterdrestro);
                         setfilterData(filterdrestro)
@@ -54,7 +55,9 @@ const Body = () => {
             <div className="res-container">
                 {
                     filterddata.map((restdata) => (
-                        <Rescard key={restdata?.info.id} ResData={restdata} />
+                        <Link key={restdata?.info.id} to={"/rescardmenu/" + restdata?.info.id}>
+                            <Rescard  ResData={restdata} />
+                        </Link>
                     ))
                 }
 
