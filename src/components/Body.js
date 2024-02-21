@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
 
@@ -10,7 +11,7 @@ const Body = () => {
     const [searchText, setSearchTeaxt] = useState("");
     const [filterddata, setfilterData] = useState([]);
 
-    useEffect(() => {
+    useEffect(() => { 
         fetchswiggi()
     }, [])
 
@@ -22,6 +23,9 @@ const Body = () => {
         setfilterData(response.data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         console.log("updated data", response.data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
     }
+
+    const onlineStatus = useOnlineStatus();
+    if (onlineStatus === false) return <h1>Looks like you're offline !! Please check your internet connection</h1>
 
     return Listofrestarunts.length === 0 ? (<Shimmer />) : (
         <div className="body">
@@ -56,7 +60,7 @@ const Body = () => {
                 {
                     filterddata.map((restdata) => (
                         <Link key={restdata?.info.id} to={"/rescardmenu/" + restdata?.info.id}>
-                            <Rescard  ResData={restdata} />
+                            <Rescard ResData={restdata} />
                         </Link>
                     ))
                 }
