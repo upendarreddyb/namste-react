@@ -28,9 +28,9 @@ class UserClass extends React.Component {
         console.log("child render")
 
         return (
-            <div className="contact-card">
-                <div className="profile">
-                    <img src={avatar_url} />
+            <div className="m-4 p-4 w-[300px] bg-gray-50 rounded-lg shadow-lg">
+                <div className="rounded-lg p-2 w-30">
+                    <img src={avatar_url}/>
                 </div>
                 <h3>Name:{name}</h3>
                 <h4>Location: {location}</h4>

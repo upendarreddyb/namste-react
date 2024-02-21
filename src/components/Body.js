@@ -11,7 +11,7 @@ const Body = () => {
     const [searchText, setSearchTeaxt] = useState("");
     const [filterddata, setfilterData] = useState([]);
 
-    useEffect(() => { 
+    useEffect(() => {
         fetchswiggi()
     }, [])
 
@@ -25,38 +25,37 @@ const Body = () => {
     }
 
     const onlineStatus = useOnlineStatus();
-    if (onlineStatus === false) return <h1>Looks like you're offline !! Please check your internet connection</h1>
+    if (onlineStatus === false) return <h1>Looks like you 're offline !! Please check your internet connection</h1>
 
     return Listofrestarunts.length === 0 ? (<Shimmer />) : (
         <div className="body">
-            <div className="filter">
-                <button className="filter-btn" variant="primary"
-                    onClick={() => {
-                        const toratedRestro = Listofrestarunts.filter((res) => res.info.avgRating > 4.2);
-                        setfilterRestro(toratedRestro)
-                    }
-
-                    }
-                >Filter Top Restarunts</button>
-
-                <div className="search">
-                    <input type="text" value={searchText} onChange={(e) =>
+            <div className="filter flex">
+               
+                <div className="search m-4 p-4 ">
+                    <input className="border border-solid border-black" type="text" value={searchText} onChange={(e) =>
                         setSearchTeaxt(e.target.value)} />
-                    <button onClick={() => {
-                        console.log("searchText", searchText);
+                    <button className="px-5 py-1 bg-green-100 m-4 rounded-lg" onClick={() => {
                         const filterdrestro = Listofrestarunts.filter(
                             (response) => response.info.name.includes(searchText)
                         )
-                        console.log("filterdrestro", filterdrestro);
                         setfilterData(filterdrestro)
                     }
                     }
                     >Search</button>
                 </div>
+                <div className="search m-4 p-4 flex items-center">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+                        onClick={() => {
+                            const toratedRestro = Listofrestarunts.filter((res) => res.info.avgRating > 4.2);
+                            setfilterRestro(toratedRestro)
+                        }
+                        }
+                    >Top Restarunts</button>
+                </div>
 
             </div>
             <br></br>
-            <div className="res-container">
+            <div className="flex flex-wrap">
                 {
                     filterddata.map((restdata) => (
                         <Link key={restdata?.info.id} to={"/rescardmenu/" + restdata?.info.id}>

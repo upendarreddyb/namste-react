@@ -6,11 +6,11 @@ const Rescard = (props) => {
     const { name, cuisines, avgRating, cloudinaryImageId, sla } = ResData?.info;
 
     return (
-        <div className="res-card">
-             <img className="res-logo" src={IMG_URL +
+        <div className="m-4 p-4 w-[250px] bg-gray-50 rounded-lg hover:bg-gray-200">
+             <img className="rounded-lg" src={IMG_URL +
                 cloudinaryImageId} /> 
-            <h3>{name}</h3>
-            <h4>{cuisines.join(",")}</h4>
+            <h3 className="font-bold py-4 text-lg">{name}</h3>
+            <h4 className="break-words">{cuisines.join(",")}</h4>
             <h4>{avgRating} Rating</h4>
             <h4>{sla.deliveryTime} mins</h4> 
         </div>
