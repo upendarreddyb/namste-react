@@ -1,4 +1,4 @@
-import Rescard from "./Rescard";
+import Rescard, { PromotedResturent } from "./Rescard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Shimmer from "./Shimmer";
@@ -10,11 +10,11 @@ const Body = () => {
     const [Listofrestarunts, setfilterRestro] = useState([]);
     const [searchText, setSearchTeaxt] = useState("");
     const [filterddata, setfilterData] = useState([]);
-
+    const RestaruntcardPromoted = PromotedResturent(Rescard);
     useEffect(() => {
         fetchswiggi()
     }, [])
-
+    console.log("Listofrestarunts", Listofrestarunts)
     const fetchswiggi = async () => {
         const response = await axios.get(
             "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING", {
@@ -30,7 +30,7 @@ const Body = () => {
     return Listofrestarunts.length === 0 ? (<Shimmer />) : (
         <div className="body">
             <div className="filter flex">
-               
+
                 <div className="search m-4 p-4 ">
                     <input className="border border-solid border-black" type="text" value={searchText} onChange={(e) =>
                         setSearchTeaxt(e.target.value)} />
@@ -59,7 +59,11 @@ const Body = () => {
                 {
                     filterddata.map((restdata) => (
                         <Link key={restdata?.info.id} to={"/rescardmenu/" + restdata?.info.id}>
-                            <Rescard ResData={restdata} />
+
+                            {
+                            (restdata?.info?.avgRating > 4) ? (< RestaruntcardPromoted ResData={restdata} />
+                            ) : (<Rescard ResData={restdata} />)}
+
                         </Link>
                     ))
                 }
