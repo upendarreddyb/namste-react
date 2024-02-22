@@ -10,12 +10,30 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaruntsMenu from "./components/RestaruntsMenu";
-//import Grocery from "./components/Grocery";
+//import UserContext from "./utils/UserContext";
+import UserContext from './utils/UserContext';
+
+import { useState, useEffect } from "react";
 const Approot = () => {
-    return <div className="app">
-        <Header />
-        <Outlet />
-    </div>
+
+
+    const [userName, setUserName] = useState();
+    useEffect(() => {
+        const data = {
+            name: "Upendar Reddy"
+
+        }
+        setUserName(data.name);
+    }, []);
+
+    return (
+        <UserContext.Provider value={{ loggedInUser: userName, setUserName}}>
+            <div className="app">
+                <Header />
+                <Outlet />
+            </div>
+        </UserContext.Provider>
+    )
 }
 
 const Grocery = lazy(() => import('./components/Grocery'));
