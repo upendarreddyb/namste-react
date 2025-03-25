@@ -11,7 +11,8 @@ class About extends React.Component {
         ///svfjsdvjds
     }
     componentDidMount(){
-        console.log("parent componentDidMount")
+      console.log("parent componentDidMount");
+      //git checkout -b new-branch-name
     }
     render() {
         console.log("parent render")
