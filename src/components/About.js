@@ -5,7 +5,10 @@ import React from "react";
 class About extends React.Component {
     constructor(props) {
         super(props)
-        console.log("parent constructor")
+        console.log("parent constructor");
+
+
+        ///svfjsdvjds
     }
     componentDidMount(){
         console.log("parent componentDidMount")
