@@ -8,7 +8,8 @@ class About extends React.Component {
         console.log("parent constructor")
     }
     componentDidMount(){
-        console.log("parent componentDidMount")
+      console.log("parent componentDidMount");
+      //git checkout -b new-branch-name
     }
     render() {
         console.log("parent render")
